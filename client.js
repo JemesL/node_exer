@@ -1,10 +1,11 @@
-var http = require('http')
-var postData = '好玩的'
+var http = require('http');
+var querystring = require('querystring')
+var postData = 'hello nihaoa '
 
 var options = {
   hostname: '172.19.88.68',
   port: 8000,
-  path: '/test/2',
+  path: '/test/3',
   method: 'POST',
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded',
@@ -19,6 +20,9 @@ var req = http.request(options, function(res) {
   res.on('data', function (chunk) {
     console.log('BODY: ' + chunk);
   });
+  res.on('end', function (chunk) {
+
+  })
 });
 
 req.on('error', function(e) {
@@ -26,5 +30,5 @@ req.on('error', function(e) {
 });
 
 // write data to request body
-req.write('好玩的');
+req.write(postData);
 req.end();

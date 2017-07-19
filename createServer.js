@@ -12,6 +12,7 @@ server.on('request', function (request, response) {
     response.write('Hello hehe da');
     response.end();
   } else if (url.pathname === '/test/2') {
+    console.log('request success');
     response.writeHead(200, {'Content-Type': 'text/plain; charset=UTF-8'});
     response.write(request.method + ' ' + request.url +
       ' HTTP/' + request.httpVersion + '\r\n');
@@ -19,7 +20,8 @@ server.on('request', function (request, response) {
       response.write(h + ': ' + request.headers[h] + '\r\n');
     }
     response.write('\r\n');
-    request.on('data', function(chunk) { response.write(chunk); });
+    request.on('data', function(chunk) { response.write(chunk);
+    console.log(JSON.parse(chunk)); });
     request.on('end', function(chunk) { response.end(); });
   } else {
     var filename = url.pathname.substring(1);
